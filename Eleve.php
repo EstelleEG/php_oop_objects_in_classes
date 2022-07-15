@@ -17,6 +17,9 @@
             $this->setPrenom($prenom);
             //$this->setCoursId($coursId);
             $this->setAge(20); //set by default, everytime I create an object
+            if($prenom == 'Estelle'){
+                $this->setAge(39);
+            }
             $this->setCours($cours); //object
 
         }
@@ -85,11 +88,26 @@
              echo ' ';
              echo $this->getNom();
              echo'<br>';
-     }
+        }
 
         // public function displayAgeNextYear(){
         //     $this->setAge($this->getAge()+1);
         //     echo $this->getAge();
         // }
 
+        //SAVE DATAS IN THE DB
+        public function save(){
+            $pdo = Db::getConnection();
+           
+            $query = $pdo->prepare
+            ("INSERT INTO Eleve (nom, prenom, cours_id) 
+            VALUES(:nom, :prenom, :cours_id)");
+
+            $query->bindParam(':nom', $this->nom);
+            $query->bindParam(':prenom', $this->prenom);
+            $course_id = $this->getCours()->getId();
+            $query->bindParam(':cours_id', $course_id);
+            $query->execute();
+            echo "Data inserted successfully";
+       }
     }

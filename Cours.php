@@ -9,7 +9,6 @@
 
 
         public function __construct(Salle $salle, int $id, string $nom) {
-
             $this->setId($id);
             $this->setNom($nom);
             //$this->setSalleId($salleId);

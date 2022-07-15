@@ -47,10 +47,9 @@ require ('./Db.php');
 
 
 
-
-// //////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 // DISPLAY cours via the object 'SALLE'
-$salle = new Salle(3, 0);
+$salle = new Salle(5, 0);
 echo'<br>';
 // $salle->setNum(3);
 $mesCours = $salle->getCours(); //here, i get salle id 3 , num 21
@@ -58,4 +57,14 @@ $mesCours = $salle->getCours(); //here, i get salle id 3 , num 21
 foreach($mesCours as $cour){
     $cour->displayCours();
 }
+
+$eleve = new Eleve($mesCours[0], 19, 'Gregoire', 'Estelle');
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// // INSERT DATAS OF CLASS ELEVE, INTO DB
+$eleve->save();
+
+
+
 

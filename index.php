@@ -35,7 +35,6 @@ require ('./Db.php');
 // echo $cours->displayCours();
 
 
-
 //////////////////////////////////////////////////////////////////////////////////
 // // DISPLAY ELEVES VIA THE OBJECT 'COURS'
 //  $cours = new Cours(2, 'Ashtanga', 2);
@@ -46,7 +45,6 @@ require ('./Db.php');
 //  }
 
 
-
 ////////////////////////////////////////////////////////////////////////////////////
 // DISPLAY cours via the object 'SALLE'
 $salle = new Salle(5, 0);
@@ -55,15 +53,26 @@ echo'<br>';
 $mesCours = $salle->getCours(); //here, i get salle id 3 , num 21
 
 foreach($mesCours as $cour){
-    $cour->displayCours();
+    //$cour->displayCours();
 }
-
-$eleve = new Eleve($mesCours[0], 19, 'Gregoire', 'Estelle');
+$eleve = new Eleve($mesCours[0], 19, 'halalalalalanlajejrhgurthgitjh', 'Estelle');
 
 
 //////////////////////////////////////////////////////////////////////////////////
 // // INSERT DATAS OF CLASS ELEVE, INTO DB
 $eleve->save();
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// // UPDATE DATAS OF CLASS ELEVE, INTO DB
+//$eleve->updateName('Gregoire');
+
+//////////////////////////////////////////////////////////////////////////////////
+// // DELETE DATAS OF CLASS ELEVE, INTO DB
+$eleve->deleteName('rouli');
+
+?>
+
 
 
 

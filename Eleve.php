@@ -95,19 +95,58 @@
         //     echo $this->getAge();
         // }
 
-        //SAVE DATAS IN THE DB
+
+
+        //SAVE DATAS IN THE DB //ADD
         public function save(){
             $pdo = Db::getConnection();
            
-            $query = $pdo->prepare
-            ("INSERT INTO Eleve (nom, prenom, cours_id) 
-            VALUES(:nom, :prenom, :cours_id)");
+            $query = 'INSERT INTO Eleve (nom, prenom, cours_id) 
+            VALUES(:nom, :prenom, :cours_id)';
 
-            $query->bindParam(':nom', $this->nom);
-            $query->bindParam(':prenom', $this->prenom);
+            $preparedQuery = $pdo->prepare($query);
+
+            $preparedQuery->bindParam(':nom', $this->nom);
+            $preparedQuery->bindParam(':prenom', $this->prenom);
             $course_id = $this->getCours()->getId();
-            $query->bindParam(':cours_id', $course_id);
-            $query->execute();
+            $preparedQuery->bindParam(':cours_id', $course_id);
+
+            $preparedQuery->execute();
             echo "Data inserted successfully";
        }
+
+
+    //    //UPDATE DATAS IN THE DB
+    //    public function updateName($nameUpdated){
+    //     $pdo = Db::getConnection();
+       
+    //     $query = "UPDATE Eleve SET nom = :nomUpdated WHERE nom = :nom"; //sql query
+
+    //     $preparedQuery = $pdo->prepare($query);
+
+    //     $preparedQuery->bindParam(':nomUpdated',$nameUpdated);
+    //     $preparedQuery->bindParam(':nom',$this->nom);
+    //     $preparedQuery->execute();
+        
+        // $preparedQuery = $pdo->execute([
+        //     'newNom' =>'zaliUpdated', 
+        //     'oldNom' =>'zali'
+        // ]);
+
+        // echo "Data updated successfully";
+        // }
+
+
+    //////////////////DELETE DATAS IN THE DB///////////////////////////
+       public function deleteName($nom){
+        $pdo = Db::getConnection();
+
+        $query = "DELETE FROM Eleve WHERE nom = :nom"; //sql query
+
+        $preparedQuery = $pdo->prepare($query);
+        $preparedQuery->bindParam(':nom', $nom);
+        $preparedQuery->execute();
+        echo "Data deleted successfully";
+        }
+
     }
